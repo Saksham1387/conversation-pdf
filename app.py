@@ -14,9 +14,8 @@ import os
 #sidebar contents
 
 with st.sidebar:
-    st.title('title')
-    st.markdown("random words")
-    st.write('made with')
+    st.title('Chat with PDF')
+    
 
 def main():
     st.header("Grow Knowledge in seconds")
@@ -56,7 +55,7 @@ def main():
     st.write(query)
     if query:
         docs=VectorStore.similarity_search(query=query,k=3)
-        llm=Ollama(model="lamma2")
+        llm=Ollama(model="llama2")
         chain=load_qa_chain(llm=llm, chain_type="stuff")
         with get_openai_callback() as cb:
             response=chain.run(input_documents=docs,question=query)
